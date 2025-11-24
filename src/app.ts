@@ -19,7 +19,7 @@ app.get("/", (c) => {
 
 app.route("/api/users", userRouter);
 
-app.basePath("/api/auth").route("/", authRouter);
+app.basePath("/api").route("/", authRouter);
 
 app.route("/api/submit", useForm);
 
