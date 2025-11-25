@@ -6,10 +6,11 @@ import useForm from "./routes/postForms.js";
 import getAllForms from "./routes/getAllForms.js";
 import { logger } from "hono/logger";
 import { jwt } from "hono/jwt";
-
+import uploadfile from "./routes/testing/uploadfile.js";
 const app = new Hono({
   strict: false,
 });
+
 app.use("*", logger());
 
 app.get("/", (c) => {
@@ -23,4 +24,5 @@ app.basePath("/api").route("/", authRouter);
 
 app.route("/api/submit", useForm);
 app.route("/api/get", getAllForms);
+app.route("/file", uploadfile);
 export default app;
