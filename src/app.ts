@@ -1,12 +1,13 @@
 import { Hono } from "hono";
 import userRouter from "./routes/user.js";
-import authRouter from "./routes/auth.js";
+import authRouter from "./routes/auth/auth.js";
 import "dotenv/config";
-import useForm from "./routes/postForms.js";
-import getAllForms from "./routes/getAllForms.js";
+import useForm from "./routes/upload/postForms.js";
+import getAllForms from "./routes/get/getAllForms.js";
 import { logger } from "hono/logger";
 import { jwt } from "hono/jwt";
-import uploadfile from "./routes/testing/uploadfile.js";
+import uploadfile from "./routes/upload/uploadfile.js";
+import createvacancies from "./routes/upload/createvacancies.js";
 const app = new Hono({
   strict: false,
 });
@@ -22,7 +23,8 @@ app.route("/api/users", userRouter);
 
 app.basePath("/api").route("/", authRouter);
 
-app.route("/api/submit", useForm);
-app.route("/api/get", getAllForms);
-app.route("/file", uploadfile);
+app.route("/upload/form", useForm);
+app.route("/get/form", getAllForms);
+app.route("/upload/file", uploadfile);
+app.route("/upload/vacancies", createvacancies);
 export default app;

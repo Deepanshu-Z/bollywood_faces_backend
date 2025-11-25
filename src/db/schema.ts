@@ -1,5 +1,4 @@
 import { relations } from "drizzle-orm";
-import { varchar } from "drizzle-orm/mysql-core";
 import {
   pgTable,
   text,
@@ -7,7 +6,17 @@ import {
   boolean,
   index,
   uuid,
+  pgEnum,
+  integer,
 } from "drizzle-orm/pg-core";
+export const rolesEnum = pgEnum("roles", ["user", "admin"]);
+export const employmentEnum = pgEnum("employmentType", [
+  "full_time",
+  "part_time",
+  "contract",
+  "internship",
+  "freelance",
+]);
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -20,7 +29,20 @@ export const user = pgTable("user", {
     .defaultNow()
     .$onUpdate(() => /* @__PURE__ */ new Date())
     .notNull(),
-  role: text("role").default("user").notNull(),
+  role: rolesEnum().default("user").notNull(),
+});
+
+export const vacancies = pgTable("vacancies", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  image: text("image"),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+  employmentType: employmentEnum("employment_type")
+    .default("full_time")
+    .notNull(),
+  location: text("location").notNull(),
+  experienceYears: integer("experience_years").default(0).notNull(),
 });
 
 export const session = pgTable(
@@ -113,4 +135,5 @@ export const schema = {
   session,
   account,
   verification,
+  vacancies,
 };

@@ -1,10 +1,10 @@
 import { Hono } from "hono";
-import db from "../db/db.js";
-import { forms } from "../db/schema.js";
+import db from "../../db/db.js";
+import { forms } from "../../db/schema.js";
 
 const useForm = new Hono();
 
-useForm.post("/forms", async (c) => {
+useForm.post("/post", async (c) => {
   const { id, username, email, content } = await c.req.json();
 
   try {
