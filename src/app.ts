@@ -8,6 +8,7 @@ import { logger } from "hono/logger";
 import { jwt } from "hono/jwt";
 import uploadfile from "./routes/upload/uploadfile.js";
 import createvacancies from "./routes/upload/createvacancies.js";
+import getallvacancies from "./routes/get/getallvacancies.js";
 const app = new Hono({
   strict: false,
 });
@@ -27,4 +28,6 @@ app.route("/upload/form", useForm);
 app.route("/get/form", getAllForms);
 app.route("/upload/file", uploadfile);
 app.route("/upload/vacancies", createvacancies);
+app.route("/get/vacancies", getallvacancies);
+
 export default app;
