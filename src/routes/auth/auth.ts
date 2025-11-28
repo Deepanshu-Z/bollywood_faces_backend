@@ -6,7 +6,7 @@ const authRouter = new Hono();
 authRouter
   .on(["POST", "GET"], "/auth/*", (c) => auth.handler(c.req.raw))
   .get("/", async (c) => {
-    return c.text("hi");
+    return c.json({ message: "user created successfully" });
   });
 
 authRouter.get("/check", (c) => {

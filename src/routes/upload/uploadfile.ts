@@ -14,7 +14,7 @@ uploadfile.post("/", async (c) => {
   try {
     const pdf = await cloudinary.uploader.upload(url, {
       resource_type: "auto",
-      folder: "cloudinary-node-upload-pdf-demo",
+      folder: "cloudinary-node-upload-pdf-bollywoodfaces",
       use_filename: true,
       unique_filename: false,
     });

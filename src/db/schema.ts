@@ -10,18 +10,18 @@ import {
   integer,
   numeric,
 } from "drizzle-orm/pg-core";
-const rolesEnum = pgEnum("roles", ["user", "admin"]);
-const employmentEnum = pgEnum("employmentType", [
+export const rolesEnum = pgEnum("roles", ["user", "admin"]);
+export const employmentEnum = pgEnum("employmentType", [
   "full_time",
   "part_time",
   "contract",
   "internship",
   "freelance",
 ]);
-const skintone = pgEnum("skintone", ["fair", "brown", "black"]);
-const dresses = pgEnum("dresses", ["indian", "western", "shots", "hot"]);
-const gender = pgEnum("gender", ["male", "female"]);
-const interested = pgEnum("interested", [
+export const skintone = pgEnum("skintone", ["fair", "brown", "black"]);
+export const dresses = pgEnum("dresses", ["indian", "western", "shots", "hot"]);
+export const gender = pgEnum("gender", ["male", "female"]);
+export const interested = pgEnum("interested", [
   "Acting",
   "Print_shoot",
   "Ramp shows",
@@ -71,7 +71,7 @@ export const profile = pgTable("profile", {
   video: text("video_url"),
   image: text("image_url"),
   address: text("address"),
-  bust: numeric("bus_size", { precision: 5, scale: 2 }),
+  bust: numeric("bust_size", { precision: 5, scale: 2 }),
   waist: numeric("waist_size", { precision: 5, scale: 2 }),
   hips: numeric("hips_size", { precision: 5, scale: 2 }),
   skin: skintone().default("brown"),
