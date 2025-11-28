@@ -25,6 +25,7 @@ export const user = pgTable("user", {
   emailVerified: boolean("email_verified").default(false).notNull(),
   image: text("image"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
+  experience: text("experience").notNull(),
   updatedAt: timestamp("updated_at")
     .defaultNow()
     .$onUpdate(() => /* @__PURE__ */ new Date())
@@ -32,9 +33,20 @@ export const user = pgTable("user", {
   role: rolesEnum().default("user").notNull(),
 });
 
+export const profile = pgTable("profile", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: text("user_Id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  resume: text("resume_url"),
+  video: text("video_url"),
+});
+
 export const vacancies = pgTable("vacancies", {
   id: uuid("id").defaultRandom().primaryKey(),
   title: text("title").notNull(),
+  package: text("package"),
+  skills: text("skills"),
   description: text("description").notNull(),
   image: text("image"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
