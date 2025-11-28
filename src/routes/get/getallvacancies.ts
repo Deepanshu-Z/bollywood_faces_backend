@@ -4,7 +4,7 @@ import { schema } from "../../db/schema.js";
 
 const getallvacancies = new Hono();
 
-getallvacancies.get("/getall", async (c) => {
+getallvacancies.get("/", async (c) => {
   try {
     const response = await db.select().from(schema.vacancies);
     console.log(response);

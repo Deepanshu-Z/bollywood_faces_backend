@@ -20,12 +20,12 @@ app.get("/", (c) => {
   return c.text("Hey");
 });
 
-app.route("/api/users", userRouter);
 app.route("/api", authRouter);
+app.route("/api/users", userRouter);
 app.route("/api/forms", useForm);
 app.route("/api/forms", getAllForms);
 app.route("/api/files", uploadfile);
 app.route("/api/vacancies", createvacancies);
-app.route("/api/vacancies", getallvacancies);
+app.route("/api/vacancies/all", getallvacancies);
 
 export default app;

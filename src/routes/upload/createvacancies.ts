@@ -4,7 +4,7 @@ import { schema } from "../../db/schema.js";
 
 const createvacancies = new Hono();
 
-createvacancies.post("/post", async (c) => {
+createvacancies.post("/", async (c) => {
   try {
     const { title, description, image, location, experienceYears } =
       await c.req.json();

@@ -6,7 +6,7 @@ import authMiddleware from "../../middleware/auth.middleware.js";
 const getAllForms = new Hono();
 
 getAllForms.use(authMiddleware);
-getAllForms.get("/allforms", async (c) => {
+getAllForms.get("/", async (c) => {
   try {
     const response = await db.select().from(forms);
     console.log(response);

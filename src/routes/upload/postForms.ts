@@ -4,7 +4,7 @@ import { forms } from "../../db/schema.js";
 
 const useForm = new Hono();
 
-useForm.post("/post", async (c) => {
+useForm.post("/", async (c) => {
   const { id, username, email, content } = await c.req.json();
 
   try {

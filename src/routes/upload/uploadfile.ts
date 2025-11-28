@@ -10,7 +10,7 @@ cloudinary.config({
 });
 
 const url = `C:\\Users\\Admin\\Downloads\\sample.pdf`;
-uploadfile.post("/alltypes", async (c) => {
+uploadfile.post("/", async (c) => {
   try {
     const pdf = await cloudinary.uploader.upload(url, {
       resource_type: "auto",
