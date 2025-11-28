@@ -8,24 +8,26 @@ import {
   uuid,
   pgEnum,
   integer,
+  numeric,
 } from "drizzle-orm/pg-core";
-export const rolesEnum = pgEnum("roles", ["user", "admin"]);
-export const employmentEnum = pgEnum("employmentType", [
+const rolesEnum = pgEnum("roles", ["user", "admin"]);
+const employmentEnum = pgEnum("employmentType", [
   "full_time",
   "part_time",
   "contract",
   "internship",
   "freelance",
 ]);
-
+const skintone = pgEnum("skintone", ["fair", "brown", "black"]);
+const dresses = pgEnum("dresses", ["indian", "western", "shots", "hot"]);
+const gender = pgEnum("gender", ["male", "female"]);
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
   emailVerified: boolean("email_verified").default(false).notNull(),
-  image: text("image"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
-  experience: text("experience").notNull(),
   updatedAt: timestamp("updated_at")
     .defaultNow()
     .$onUpdate(() => /* @__PURE__ */ new Date())
@@ -38,8 +40,27 @@ export const profile = pgTable("profile", {
   userId: text("user_Id")
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
+  gender: gender(),
+  experience: text("experience").notNull(),
   resume: text("resume_url"),
   video: text("video_url"),
+  image: text("image_url"),
+  address: text("address"),
+  bust: numeric("bus_size", { precision: 5, scale: 2 }),
+  waist: numeric("waist_size", { precision: 5, scale: 2 }),
+  hips: numeric("hips_size", { precision: 5, scale: 2 }),
+  skin: skintone().default("brown"),
+  eye: text("eye_colour"),
+  hair: text("hair_colour"),
+  shoe: integer("shoe_size"),
+  profession: text("present_profession"),
+  education: text("education"),
+  dresses: dresses().default("indian"),
+  outstation: boolean("open_for_outstation_shoots").default(true),
+  foreign: boolean("open_for_outof_country_shoots").default(true),
+  passport: boolean("passport").default(true),
+  all_timings: boolean("can_work_with_all_timings").default(true),
+  languages: text("languages_known"),
 });
 
 export const vacancies = pgTable("vacancies", {
