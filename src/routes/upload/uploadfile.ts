@@ -10,18 +10,19 @@ cloudinary.config({
 });
 
 const url = `C:\\Users\\Admin\\Downloads\\sample.pdf`;
-uploadfile.post("/pdf", async (c) => {
+uploadfile.post("/alltypes", async (c) => {
   try {
     const pdf = await cloudinary.uploader.upload(url, {
+      resource_type: "auto",
       folder: "cloudinary-node-upload-pdf-demo",
       use_filename: true,
       unique_filename: false,
     });
     console.log(pdf.secure_url);
+    return c.json({ message: "hi your file is uploaded", url: pdf.secure_url });
   } catch (error) {
     return c.json({ error }, 401);
   }
-  return c.text("hi pdf is uploading");
 });
 
 export default uploadfile;

@@ -21,13 +21,11 @@ app.get("/", (c) => {
 });
 
 app.route("/api/users", userRouter);
-
-app.basePath("/api").route("/", authRouter);
-
-app.route("/upload/form", useForm);
-app.route("/get/form", getAllForms);
-app.route("/upload/file", uploadfile);
-app.route("/upload/vacancies", createvacancies);
-app.route("/get/vacancies", getallvacancies);
+app.route("/api", authRouter);
+app.route("/api/forms", useForm);
+app.route("/api/forms", getAllForms);
+app.route("/api/files", uploadfile);
+app.route("/api/vacancies", createvacancies);
+app.route("/api/vacancies", getallvacancies);
 
 export default app;

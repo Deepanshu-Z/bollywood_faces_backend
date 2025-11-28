@@ -21,6 +21,31 @@ const employmentEnum = pgEnum("employmentType", [
 const skintone = pgEnum("skintone", ["fair", "brown", "black"]);
 const dresses = pgEnum("dresses", ["indian", "western", "shots", "hot"]);
 const gender = pgEnum("gender", ["male", "female"]);
+const interested = pgEnum("interested", [
+  "Acting",
+  "Print_shoot",
+  "Ramp shows",
+  "Designer shoot ",
+  "Ethenic wears",
+  "Western wears",
+  "Bikini shoots",
+  "Lingerie shoots",
+  "Swim suits",
+  "Transparent suits",
+  "Calender shoots",
+  "Music albums",
+  "Cameo",
+  "Comfortable with on screen kiss",
+  "On screen smooch",
+  "Love making",
+  "Indian wear",
+  "Western ",
+  "Skirt",
+  "Bikini",
+  "Shorts",
+  "Bold scenes",
+]);
+
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -61,6 +86,7 @@ export const profile = pgTable("profile", {
   passport: boolean("passport").default(true),
   all_timings: boolean("can_work_with_all_timings").default(true),
   languages: text("languages_known"),
+  interested: interested(),
 });
 
 export const vacancies = pgTable("vacancies", {
@@ -166,6 +192,7 @@ export const accountRelations = relations(account, ({ one }) => ({
 export const schema = {
   user,
   session,
+  profile,
   account,
   verification,
   vacancies,
